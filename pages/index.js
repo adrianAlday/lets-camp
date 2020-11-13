@@ -222,6 +222,11 @@ export default function Home() {
         <title>lets camp 🏕️</title>
 
         <link rel="icon" href="/favicon.ico" />
+
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans"
+        />
       </Head>
 
       <div>
@@ -233,6 +238,7 @@ export default function Home() {
               onChange={handleCampgroundQueryChange}
               onKeyDown={handleKeyDown}
               autoComplete="off"
+              className="input"
             />
 
             {campgroundResults.map((result) => (
@@ -241,6 +247,7 @@ export default function Home() {
                 onClick={() => {
                   handleCampgroundClick(result);
                 }}
+                className="section pointer campground"
               >
                 {result.name.toLowerCase()}
               </div>
@@ -248,10 +255,12 @@ export default function Home() {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <div>{campgroundSelected.name.toLowerCase()}</div>
+            <div className="section">
+              {campgroundSelected.name.toLowerCase()}
+            </div>
 
             {campsitesTotal !== 0 && (
-              <div>
+              <div className="section">
                 {campsitesLoaded} of {campsitesTotal} loaded
                 {campsitesLoaded === campsitesTotal
                   ? "!"
@@ -263,13 +272,16 @@ export default function Home() {
 
             {campsitesDays.length > 0 && (
               <React.Fragment>
-                <div onClick={handleShowOnlyWeekendDaysToggle}>
+                <div onClick={handleShowOnlyWeekendDaysToggle} className="pointer section">
                   {showOnlyWeekendDays
                     ? "showing weekend days"
                     : "showing all days"}
                 </div>
 
-                <div onClick={handleShowOnlyFavoriteCampsitesToggle}>
+                <div
+                  onClick={handleShowOnlyFavoriteCampsitesToggle}
+                  className="section pointer"
+                >
                   {showOnlyFavoriteCampsites
                     ? "showing favorite campsites"
                     : "showing all campsites"}
@@ -408,7 +420,9 @@ export default function Home() {
                     </div>
                   ))}
 
-                <div onClick={hanldeReloadPageClick}>back</div>
+                <div onClick={hanldeReloadPageClick} className="pointer">
+                  back
+                </div>
               </React.Fragment>
             )}
           </React.Fragment>
@@ -416,6 +430,34 @@ export default function Home() {
       </div>
 
       <style jsx global>{`
+        body {
+          font-family: "IBM Plex Sans", serif;
+          background-color: #202124;
+          color: #d8dbdd;
+          padding: 8px;
+        }
+        .section {
+          margin-bottom: 16px;
+        }
+        .pointer {
+          cursor: pointer;
+        }
+        input {
+          background-color: #575757;
+          color: #d8dbdd;
+          border-radius: 32px;
+          padding: 16px;
+          margin-bottom: 16px;
+          width: calc(100vw - 64px);
+          border: none;
+          font-size: 16px;
+        }
+        input:focus {
+          outline: none;
+        }
+        .campground {
+          margin-left: 16px;
+        }
         .campsite {
           display: grid;
           grid-template-columns:
