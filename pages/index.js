@@ -124,18 +124,16 @@ export default function Home() {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      axios
-        .get(`api/campgrounds/${campgroundQuery}`)
-        .then((response) => {
-          const results = response.data.inventory_suggestions;
-          if (results) {
-            setCampgroundResults(
-              results
-                .filter((result) => result.entity_type === "campground")
-                .sort((a, b) => (a.name > b.name ? 1 : -1))
-            );
-          }
-        });
+      axios.get(`api/campgrounds/${campgroundQuery}`).then((response) => {
+        const results = response.data.inventory_suggestions;
+        if (results) {
+          setCampgroundResults(
+            results
+              .filter((result) => result.entity_type === "campground")
+              .sort((a, b) => (a.name > b.name ? 1 : -1))
+          );
+        }
+      });
     }
   };
 
