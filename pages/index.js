@@ -254,7 +254,14 @@ export default function Home() {
             ))}
           </React.Fragment>
         ) : (
-          <React.Fragment>
+          <div className="campground campground-results">
+            <div
+              onClick={hanldeReloadPageClick}
+              className="pointer top-back"
+            >
+              back
+            </div>
+
             <div className="section">
               {campgroundSelected.name.toLowerCase()}
             </div>
@@ -272,7 +279,10 @@ export default function Home() {
 
             {campsitesDays.length > 0 && (
               <React.Fragment>
-                <div onClick={handleShowOnlyWeekendDaysToggle} className="pointer section">
+                <div
+                  onClick={handleShowOnlyWeekendDaysToggle}
+                  className="pointer section"
+                >
                   {showOnlyWeekendDays
                     ? "showing weekend days"
                     : "showing all days"}
@@ -420,12 +430,15 @@ export default function Home() {
                     </div>
                   ))}
 
-                <div onClick={hanldeReloadPageClick} className="pointer">
+                <div
+                  onClick={hanldeReloadPageClick}
+                  className="section pointer back"
+                >
                   back
                 </div>
               </React.Fragment>
             )}
-          </React.Fragment>
+          </div>
         )}
       </div>
 
@@ -469,6 +482,13 @@ export default function Home() {
             [days-end
             end];
           grid-auto-rows: minmax(30px, auto);
+        }
+        .top-back {
+          margin-top: 14px;
+          margin-bottom: 32px;
+        }
+        .back {
+          margin-top: 16px;
         }
       `}</style>
     </div>
