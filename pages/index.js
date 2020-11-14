@@ -412,9 +412,9 @@ export default function Home() {
                                     days.sat,
                                     days.sun,
                                   ]) ? (
-                                    "🔵"
+                                    "🟣"
                                   ) : (
-                                    "🟢"
+                                    "🔵"
                                   )
                                 ) : (
                                   "⚫"
