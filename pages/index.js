@@ -417,7 +417,7 @@ export default function Home() {
                                     "🟢"
                                   )
                                 ) : (
-                                  "⚪"
+                                  "⚫"
                                 )
                               ) : (
                                 <React.Fragment>&nbsp;</React.Fragment>
