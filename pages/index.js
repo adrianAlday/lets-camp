@@ -396,7 +396,24 @@ export default function Home() {
                               : true
                           )
                           .map((availability) => (
-                            <div key={availability[0]}>
+                            <div
+                              key={availability[0]}
+                              style={{
+                                gridColumnStart:
+                                  campsitesDays
+                                    .filter((day) =>
+                                      showOnlyWeekendDays
+                                        ? isDay(day, [
+                                            days.thu,
+                                            days.fri,
+                                            days.sat,
+                                            days.sun,
+                                          ])
+                                        : true
+                                    )
+                                    .indexOf(availability[0]) + 3,
+                              }}
+                            >
                               {!showOnlyWeekendDays ||
                               (showOnlyWeekendDays &&
                                 isDay(availability[0], [
