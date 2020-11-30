@@ -84,6 +84,10 @@ const days = {
   sat: 6,
 };
 
+const saturdayToSunday = [days.sat, days.sun];
+const fridayToSunday = [days.fri, ...saturdayToSunday];
+const thursdayToSunday = [days.thu, ...fridayToSunday];
+
 const isDay = (timestamp, daysArray) =>
   daysArray.includes(new Date(timestamp).getDay());
 
@@ -302,12 +306,7 @@ export default function Home() {
                   {campsitesDays
                     .filter((timestamp) =>
                       showOnlyWeekendDays
-                        ? isDay(timestamp, [
-                            days.thu,
-                            days.fri,
-                            days.sat,
-                            days.sun,
-                          ])
+                        ? isDay(timestamp, thursdayToSunday)
                         : true
                     )
                     .map((timestamp, index) => {
@@ -331,11 +330,7 @@ export default function Home() {
                             {day === "01" ||
                             index === 0 ||
                             (showOnlyWeekendDays &&
-                              isDay(timestamp, [
-                                days.fri,
-                                days.sat,
-                                days.sun,
-                              ])) ? (
+                              isDay(timestamp, fridayToSunday)) ? (
                               month
                             ) : (
                               <React.Fragment>&nbsp;</React.Fragment>
@@ -345,19 +340,13 @@ export default function Home() {
                           <div>
                             {!showOnlyWeekendDays ||
                             (showOnlyWeekendDays &&
-                              isDay(timestamp, [
-                                days.fri,
-                                days.sat,
-                                days.sun,
-                              ])) ? (
+                              isDay(timestamp, fridayToSunday)) ? (
                               day
                             ) : (
                               <React.Fragment>&nbsp;</React.Fragment>
                             )}
                           </div>
-                          {isDay(timestamp, [days.sat, days.sun]) && (
-                            <div>⭐</div>
-                          )}
+                          {isDay(timestamp, saturdayToSunday) && <div>⭐</div>}
                         </div>
                       );
                     })}
@@ -387,12 +376,7 @@ export default function Home() {
                         Object.entries(campsite.availabilities)
                           .filter((availability) =>
                             showOnlyWeekendDays
-                              ? isDay(availability[0], [
-                                  days.thu,
-                                  days.fri,
-                                  days.sat,
-                                  days.sun,
-                                ])
+                              ? isDay(availability[0], thursdayToSunday)
                               : true
                           )
                           .map((availability) => (
@@ -403,12 +387,7 @@ export default function Home() {
                                   campsitesDays
                                     .filter((day) =>
                                       showOnlyWeekendDays
-                                        ? isDay(day, [
-                                            days.thu,
-                                            days.fri,
-                                            days.sat,
-                                            days.sun,
-                                          ])
+                                        ? isDay(day, thursdayToSunday)
                                         : true
                                     )
                                     .indexOf(availability[0]) + 3,
@@ -416,16 +395,9 @@ export default function Home() {
                             >
                               {!showOnlyWeekendDays ||
                               (showOnlyWeekendDays &&
-                                isDay(availability[0], [
-                                  days.fri,
-                                  days.sat,
-                                  days.sun,
-                                ])) ? (
+                                isDay(availability[0], fridayToSunday)) ? (
                                 availability[1] === "Available" ? (
-                                  isDay(availability[0], [
-                                    days.sat,
-                                    days.sun,
-                                  ]) ? (
+                                  isDay(availability[0], saturdayToSunday) ? (
                                     "🟣"
                                   ) : (
                                     "🔵"
