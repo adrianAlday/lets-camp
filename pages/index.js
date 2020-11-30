@@ -212,7 +212,7 @@ export default function Home() {
   const handleShowOnlyFavoriteCampsitesToggle = () =>
     setShowOnlyFavoriteCampsites(!showOnlyFavoriteCampsites);
 
-  const hanldeReloadPageClick = () => {
+  const handleReloadPageClick = () => {
     window.location.reload(false);
   };
 
@@ -255,10 +255,7 @@ export default function Home() {
           </React.Fragment>
         ) : (
           <div className="campground campground-results">
-            <div
-              onClick={hanldeReloadPageClick}
-              className="pointer top-back"
-            >
+            <div onClick={handleReloadPageClick} className="pointer top-back">
               back
             </div>
 
@@ -431,7 +428,7 @@ export default function Home() {
                   ))}
 
                 <div
-                  onClick={hanldeReloadPageClick}
+                  onClick={handleReloadPageClick}
                   className="section pointer back"
                 >
                   back
