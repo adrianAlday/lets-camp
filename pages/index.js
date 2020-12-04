@@ -445,7 +445,7 @@ export default function Home() {
           background-color: #575757;
           color: #d8dbdd;
           border-radius: 32px;
-          padding: 16px;
+          padding: 16px 24px;
           margin-bottom: 16px;
           width: calc(100vw - 64px);
           border: none;
@@ -455,7 +455,7 @@ export default function Home() {
           outline: none;
         }
         .campground {
-          margin-left: 16px;
+          margin-left: 24px;
         }
         .campsite {
           display: grid;
