@@ -264,7 +264,11 @@ export default function Home() {
             </div>
 
             <div className="section">
-              {campgroundSelected.name.toLowerCase()}
+              <a
+                href={`https://www.recreation.gov/camping/campgrounds/${campgroundSelected.entity_id}`}
+              >
+                {campgroundSelected.name.toLowerCase()}
+              </a>
             </div>
 
             {campsitesTotal !== 0 && (
@@ -370,7 +374,13 @@ export default function Home() {
                           : ""}
                       </div>
 
-                      <div>{campsite.name}</div>
+                      <div>
+                        <a
+                          href={`https://www.recreation.gov/camping/campsites/${campsite.campsite_id}`}
+                        >
+                          {campsite.name}
+                        </a>
+                      </div>
 
                       {campsite.availabilities ? (
                         Object.entries(campsite.availabilities)
@@ -475,6 +485,10 @@ export default function Home() {
         }
         .back {
           margin-top: 16px;
+        }
+        a {
+          color: #d8dbdd;
+          text-decoration: none;
         }
       `}</style>
     </div>
