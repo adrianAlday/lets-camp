@@ -257,18 +257,6 @@ export default function Home() {
           ))
         ) : (
           <div className="campground campground-results">
-            <div onClick={handleReloadPageClick} className="pointer top-back">
-              back
-            </div>
-
-            <div className="section">
-              <a
-                href={`https://www.recreation.gov/camping/campgrounds/${campgroundSelected.entity_id}`}
-              >
-                {campgroundSelected.name.toLowerCase()}
-              </a>
-            </div>
-
             {campsitesTotal !== 0 && (
               <div className="section">
                 {campsitesLoaded} of {campsitesTotal} loaded
