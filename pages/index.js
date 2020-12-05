@@ -124,6 +124,8 @@ export default function Home() {
 
   const handleCampgroundQueryChange = (e) => {
     setCampgroundQuery(e.target.value);
+    setCampgroundSelected(initialCampgroundSelected);
+    setCampgroundResults(initialCamgrounds);
   };
 
   const handleKeyDown = (e) => {
