@@ -234,29 +234,27 @@ export default function Home() {
       </Head>
 
       <div>
-        {!campgroundSelected.entity_type ? (
-          <React.Fragment>
-            <input
-              type="text"
-              value={campgroundQuery}
-              onChange={handleCampgroundQueryChange}
-              onKeyDown={handleKeyDown}
-              autoComplete="off"
-              className="input"
-            />
+        <input
+          type="text"
+          value={campgroundQuery}
+          onChange={handleCampgroundQueryChange}
+          onKeyDown={handleKeyDown}
+          autoComplete="off"
+          className="input"
+        />
 
-            {campgroundResults.map((result) => (
-              <div
-                key={result.entity_id}
-                onClick={() => {
-                  handleCampgroundClick(result);
-                }}
-                className="section pointer campground"
-              >
-                {result.name.toLowerCase()}
-              </div>
-            ))}
-          </React.Fragment>
+        {!campgroundSelected.entity_type ? (
+          campgroundResults.map((result) => (
+            <div
+              key={result.entity_id}
+              onClick={() => {
+                handleCampgroundClick(result);
+              }}
+              className="section pointer campground"
+            >
+              {result.name.toLowerCase()}
+            </div>
+          ))
         ) : (
           <div className="campground campground-results">
             <div onClick={handleReloadPageClick} className="pointer top-back">
