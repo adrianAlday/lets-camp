@@ -27,7 +27,7 @@ const thursdayToSunday = [days.thu, ...fridayToSunday];
 const isDay = (timestamp, daysArray) =>
   daysArray.includes(new Date(timestamp.slice(0, -1)).getDay());
 
-export default function Home() {
+const Home = () => {
   const initialCampgroundQuery = "";
   const initialCamgrounds = [];
   const initialCampgroundSelected = {};
@@ -450,4 +450,6 @@ export default function Home() {
       `}</style>
     </div>
   );
-}
+};
+
+export default Home;
