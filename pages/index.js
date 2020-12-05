@@ -144,7 +144,9 @@ export default function Home() {
   };
 
   const handleCampgroundClick = (campground) => {
+    setCampgroundQuery(campground.name.toLowerCase());
     setCampgroundSelected(campground);
+    setCampgroundResults(initialCamgrounds);
 
     axios
       .get(`api/campsites/${campground.entity_id}`)
