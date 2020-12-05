@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import debounce from "lodash/debounce";
 import axios from "axios";
 import Head from "next/head";
 
@@ -128,20 +129,34 @@ export default function Home() {
     setCampgroundResults(initialCamgrounds);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      axios.get(`api/campgrounds/${campgroundQuery}`).then((response) => {
-        const results = response.data.inventory_suggestions;
-        if (results) {
-          setCampgroundResults(
-            results
-              .filter((result) => result.entity_type === "campground")
-              .sort((a, b) => (a.name > b.name ? 1 : -1))
-          );
-        }
-      });
-    }
-  };
+  const debouncedSearch = useRef(
+    debounce((searchValue, cancelToken) => {
+      if (searchValue !== initialCampgroundQuery) {
+        axios
+          .get(`api/campgrounds/${encodeURIComponent(searchValue)}`, {
+            cancelToken,
+          })
+          .then((response) => {
+            const results = response.data.inventory_suggestions;
+            if (results) {
+              setCampgroundResults(
+                results
+                  .filter((result) => result.entity_type === "campground")
+                  .sort((a, b) => (a.name > b.name ? 1 : -1))
+              );
+            }
+          })
+          .catch(() => null);
+      }
+    }, 300),
+    []
+  );
+
+  useEffect(() => {
+    const cancelTokenSource = axios.CancelToken.source();
+    debouncedSearch.current(campgroundQuery, cancelTokenSource.token);
+    return () => cancelTokenSource.cancel();
+  }, [campgroundQuery]);
 
   const handleCampgroundClick = (campground) => {
     setCampgroundQuery(campground.name.toLowerCase());
@@ -242,7 +257,6 @@ export default function Home() {
           type="text"
           value={campgroundQuery}
           onChange={handleCampgroundQueryChange}
-          onKeyDown={handleKeyDown}
           autoComplete="off"
           className="input"
         />
