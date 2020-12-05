@@ -275,16 +275,20 @@ export default function Home() {
           ))
         ) : (
           <div className="campground campground-results">
-            {campsitesTotal !== 0 && (
-              <div className="section">
-                {campsitesLoaded} of {campsitesTotal} loaded
-                {campsitesLoaded === campsitesTotal
-                  ? "!"
-                  : `, ${minutesRemaining} minute${
-                      minutesRemaining === 1 ? "" : "s"
-                    } remaining`}
-              </div>
-            )}
+            <div className="section">
+              {campsitesTotal === 0 ? (
+                <React.Fragment>loading...</React.Fragment>
+              ) : (
+                <React.Fragment>
+                  {campsitesLoaded} of {campsitesTotal} loaded
+                  {campsitesLoaded === campsitesTotal
+                    ? "!"
+                    : `, ${minutesRemaining} minute${
+                        minutesRemaining === 1 ? "" : "s"
+                      } remaining`}
+                </React.Fragment>
+              )}
+            </div>
 
             {campsitesDays.length > 0 && (
               <React.Fragment>
