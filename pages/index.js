@@ -93,6 +93,12 @@ export default function Home() {
     return () => cancelTokenSource.cancel();
   }, [campgroundQuery]);
 
+  const latestCampgroundSelected = useRef(campgroundSelected);
+
+  useEffect(() => {
+    latestCampgroundSelected.current = campgroundSelected;
+  }, [campgroundSelected]);
+
   const handleCampgroundClick = (campground) => {
     setCampgroundQuery(campground.name.toLowerCase());
     setCampgroundSelected(campground);
@@ -118,6 +124,14 @@ export default function Home() {
 
           for (const result of results) {
             await sleep();
+
+            if (
+              latestCampgroundSelected.current.entity_id !==
+              result.parent_asset_id
+            ) {
+              break;
+            }
+
             await axios
               .get(`api/availabilities/${result.campsite_id}`)
               .then((response) => {
