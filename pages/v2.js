@@ -61,6 +61,12 @@ const Home = () => {
     initialSelectedCampgroundId
   );
 
+  const initialShowOnly = false;
+
+  const [showOnlyFavoriteCampsites, setShowOnlyFavoriteCampsites] = useState(
+    initialShowOnly
+  );
+
   // get campgrounds
 
   const handleCampgroundsQueryChange = (e) => {
@@ -111,6 +117,7 @@ const Home = () => {
   const handleCampgroundResultClick = (campground) => {
     setCampgroundIdIsSelected(!initialCampgroundIdIsSelected);
     setDisplayedCampgroundSearchQuery(campground.name.toLowerCase());
+    setShowOnlyFavoriteCampsites(initialShowOnly);
 
     const campgroundId = campground.entity_id;
 
@@ -218,6 +225,9 @@ const Home = () => {
     };
   }, [selectedCampgroundId]);
 
+  const handleShowCampsitesToggle = () =>
+    setShowOnlyFavoriteCampsites(!showOnlyFavoriteCampsites);
+
   return (
     <div>
       <Head>
@@ -251,6 +261,21 @@ const Home = () => {
               {campgroundResult.name.toLowerCase()}
             </div>
           ))}
+
+        {campgroundCampsites[selectedCampgroundId] && (
+          <React.Fragment>
+            {favoriteCampsites[selectedCampgroundId] && (
+              <div
+                className="campground-result"
+                onClick={handleShowCampsitesToggle}
+              >
+                {showOnlyFavoriteCampsites
+                  ? "showing favorite campsites"
+                  : "showing all campsites"}
+              </div>
+            )}
+          </React.Fragment>
+        )}
 
         <div className="days-grid day-labels">
           {campgroundCampsiteAvailabilityDays?.[selectedCampgroundId]?.map(
@@ -290,9 +315,28 @@ const Home = () => {
         </div>
 
         <div className="days-grid">
-          {campgroundCampsites[selectedCampgroundId]?.map(
-            (campgroundCampsite) => (
+          {campgroundCampsites[selectedCampgroundId]
+            ?.filter((campgroundCampsite) =>
+              showOnlyFavoriteCampsites
+                ? favoriteCampsites[selectedCampgroundId]?.includes(
+                    campgroundCampsite.name
+                  )
+                : true
+            )
+            .map((campgroundCampsite) => (
               <React.Fragment key={campgroundCampsite.campsite_id}>
+                <div
+                  style={{
+                    gridColumnStart: 1,
+                  }}
+                >
+                  {favoriteCampsites[selectedCampgroundId]?.includes(
+                    campgroundCampsite.name
+                  )
+                    ? "⭐"
+                    : ""}
+                </div>
+
                 <div
                   style={{
                     gridColumnStart: 2,
@@ -334,8 +378,7 @@ const Home = () => {
                   <div>loading...</div>
                 )}
               </React.Fragment>
-            )
-          )}
+            ))}
         </div>
       </div>
 
