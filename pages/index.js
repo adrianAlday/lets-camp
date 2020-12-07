@@ -16,6 +16,8 @@ import Head from "next/head";
 
 // if site has no data, fetch it first
 
+// initially suggest some grounds before typing?
+
 const baseDelaySeconds = 3;
 
 const sleep = () =>
