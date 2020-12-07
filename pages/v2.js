@@ -454,7 +454,8 @@ const Home = () => {
         input:focus {
           outline: none;
         }
-        .campground-result, .toggle {
+        .campground-result,
+        .toggle {
           margin-left: 27px;
           margin-bottom: 27px;
         }
