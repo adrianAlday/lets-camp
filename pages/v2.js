@@ -46,8 +46,8 @@ const Home = () => {
     setCampgroundCampsiteAvailabilities,
   ] = useState({});
   const [
-    campgroundCampsiteAvailabilityDays,
-    setCampgroundCampsiteAvailabilityDays,
+    campgroundCampsiteAvailabilityDates,
+    setCampgroundCampsiteAvailabilityDates,
   ] = useState({});
 
   // ui
@@ -193,7 +193,7 @@ const Home = () => {
                     };
                   });
 
-                  setCampgroundCampsiteAvailabilityDays((previousValue) => {
+                  setCampgroundCampsiteAvailabilityDates((previousValue) => {
                     const previousCampgroundIdAvailabilityDays =
                       previousValue[campgroundId] || [];
 
@@ -299,7 +299,7 @@ const Home = () => {
         )}
 
         <div className="days-grid day-labels">
-          {campgroundCampsiteAvailabilityDays[selectedCampgroundId]
+          {campgroundCampsiteAvailabilityDates[selectedCampgroundId]
             ?.filter((timestamp) =>
               showingAllOrIsInDayRange(timestamp, thursdayToSunday)
             )
@@ -381,7 +381,7 @@ const Home = () => {
                 {campgroundCampsiteAvailabilities?.[selectedCampgroundId]?.[
                   campgroundCampsite.campsite_id
                 ] &&
-                campgroundCampsiteAvailabilityDays?.[selectedCampgroundId] ? (
+                campgroundCampsiteAvailabilityDates?.[selectedCampgroundId] ? (
                   Object.entries(
                     campgroundCampsiteAvailabilities[selectedCampgroundId][
                       campgroundCampsite.campsite_id
@@ -395,7 +395,7 @@ const Home = () => {
 
                       const style = {
                         gridColumnStart:
-                          campgroundCampsiteAvailabilityDays[
+                          campgroundCampsiteAvailabilityDates[
                             selectedCampgroundId
                           ]
                             .filter((day) =>
@@ -459,7 +459,7 @@ const Home = () => {
             [star] 27px
             [name] 123px
             [days] repeat(
-              ${campgroundCampsiteAvailabilityDays?.[selectedCampgroundId]
+              ${campgroundCampsiteAvailabilityDates?.[selectedCampgroundId]
                 ?.length || 1},
               27px
             );
