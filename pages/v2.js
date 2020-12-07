@@ -139,6 +139,8 @@ const Home = () => {
           const selectedCampgroundFavoriteSites =
             favoriteCampsites[selectedCampgroundId];
 
+          // if site has no data, fetch it first
+
           const sortedSelectedCampgroundCampsites = selectedCampgroundFavoriteSites
             ? selectedCampgroundCampsites.sort((a, b) =>
                 selectedCampgroundFavoriteSites.includes(a.name) >
