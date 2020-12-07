@@ -54,7 +54,7 @@ const Home = () => {
 
   const initialCampgroundIdIsSelected = false;
 
-  const [campgroundIdIsSelected, setCampgroundIdIsSelected] = useState(
+  const [isCampgroundSelected, setIsCampgroundSelected] = useState(
     initialCampgroundIdIsSelected
   );
 
@@ -80,7 +80,7 @@ const Home = () => {
     setDisplayedCampgroundSearchQuery(value);
     setRequestedCampgroundSearchQuery(value);
 
-    setCampgroundIdIsSelected(initialCampgroundIdIsSelected);
+    setIsCampgroundSelected(initialCampgroundIdIsSelected);
     setSelectedCampgroundId(initialSelectedCampgroundId);
   };
 
@@ -121,7 +121,7 @@ const Home = () => {
   // get campground campsites
 
   const handleCampgroundResultClick = (campground) => {
-    setCampgroundIdIsSelected(!initialCampgroundIdIsSelected);
+    setIsCampgroundSelected(!initialCampgroundIdIsSelected);
     setDisplayedCampgroundSearchQuery(campground.name.toLowerCase());
     setShowOnlyWeekendDays(initialShowOnly);
     setShowOnlyFavoriteCampsites(initialShowOnly);
@@ -264,7 +264,7 @@ const Home = () => {
           autoComplete="off"
         />
 
-        {!campgroundIdIsSelected &&
+        {!isCampgroundSelected &&
           campgroundSearchResults.map((campgroundResult) => (
             <div
               key={campgroundResult.entity_id}
