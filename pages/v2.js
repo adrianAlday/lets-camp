@@ -145,24 +145,27 @@ const Home = () => {
 
     if (selectedCampgroundId !== initialSelectedCampgroundId) {
       const getAvailabilities = async () => {
-        const selectedCampgroundCampsites = JSON.parse(
-          JSON.stringify(campgroundCampsites[selectedCampgroundId])
-        );
+        const selectedCampgroundCampsites =
+          campgroundCampsites[selectedCampgroundId];
 
         if (selectedCampgroundCampsites) {
+          const copyOfSelectedCampgroundCampsites = JSON.parse(
+            JSON.stringify(selectedCampgroundCampsites)
+          );
+
           const selectedCampgroundFavoriteSites =
             favoriteCampsites[selectedCampgroundId];
 
           // if site has no data, fetch it first
 
           const sortedSelectedCampgroundCampsites = selectedCampgroundFavoriteSites
-            ? selectedCampgroundCampsites.sort((a, b) =>
+            ? copyOfSelectedCampgroundCampsites.sort((a, b) =>
                 selectedCampgroundFavoriteSites.includes(a.name) >
                 selectedCampgroundFavoriteSites.includes(b.name)
                   ? -1
                   : 1
               )
-            : selectedCampgroundCampsites;
+            : copyOfSelectedCampgroundCampsites;
 
           for (const campgroundCampsite of sortedSelectedCampgroundCampsites) {
             await sleep();
