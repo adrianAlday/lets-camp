@@ -409,12 +409,18 @@ const Home = () => {
                             selectedCampgroundId
                           ]
                             .filter((timestamp) =>
-                              showingAllOrIsInDayRange(timestamp, thursdayToSunday)
+                              showingAllOrIsInDayRange(
+                                timestamp,
+                                thursdayToSunday
+                              )
                             )
                             .indexOf(timestamp) + 3,
                       };
 
-                      const copy = showingAllOrIsInDayRange(timestamp, fridayToSunday)
+                      const copy = showingAllOrIsInDayRange(
+                        timestamp,
+                        fridayToSunday
+                      )
                         ? status === "Available"
                           ? isInDayRange(timestamp, saturdayToSunday)
                             ? "🟣"
