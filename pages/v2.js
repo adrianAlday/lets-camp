@@ -242,6 +242,8 @@ const Home = () => {
   const handleShowCampsitesToggle = () =>
     setShowOnlyFavoriteCampsites(!showOnlyFavoriteCampsites);
 
+  const blankSpace = () => <React.Fragment>&nbsp;</React.Fragment>;
+
   return (
     <div>
       <Head>
