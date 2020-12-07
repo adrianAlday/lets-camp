@@ -12,6 +12,8 @@ import Head from "next/head";
 
 // cursor pointer css
 
+// link to campground
+
 const baseDelaySeconds = 3;
 
 const sleep = () =>
