@@ -6,6 +6,8 @@ import Head from "next/head";
 
 // keep search bar and top and left labels sticky when scrolling around
 
+// make search bar width work in that situation
+
 // allow arrow up and down to select search results
 
 // show load count, time to load
