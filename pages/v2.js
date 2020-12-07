@@ -4,6 +4,14 @@ import axios from "axios";
 import { daysOfWeek, favoriteCampsites } from "../common/helper";
 import Head from "next/head";
 
+// keep top and left labels sticky when scrolling around
+
+// allow arrow up and down to select search results
+
+// show load count, time to load
+
+// cursor pointer css
+
 const baseDelaySeconds = 3;
 
 const sleep = () =>
