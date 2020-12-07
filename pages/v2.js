@@ -12,6 +12,8 @@ import Head from "next/head";
 
 // link to campground
 
+// if site has no data, fetch it first
+
 const baseDelaySeconds = 3;
 
 const sleep = () =>
@@ -163,8 +165,6 @@ const Home = () => {
 
           const selectedCampgroundFavoriteSites =
             favoriteCampsites[selectedCampgroundId];
-
-          // if site has no data, fetch it first
 
           const sortedSelectedCampgroundCampsites = selectedCampgroundFavoriteSites
             ? copyOfSelectedCampgroundCampsites.sort((a, b) =>
