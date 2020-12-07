@@ -120,7 +120,9 @@ const Home = () => {
 
   const handleCampgroundResultClick = (campground) => {
     setIsCampgroundSelected(!initialIsCampgroundSelected);
+
     setDisplayedCampgroundSearchQuery(campground.name.toLowerCase());
+
     setShowOnlyWeekendDays(initialShowOnly);
     setShowOnlyFavoriteCampsites(initialShowOnly);
 
