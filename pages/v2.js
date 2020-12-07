@@ -303,7 +303,7 @@ const Home = () => {
           </React.Fragment>
         )}
 
-        <div className="days-grid day-labels">
+        <div className="days-grid date-labels">
           {campgroundCampsiteAvailabilityDates[selectedCampgroundId]
             ?.filter((timestamp) =>
               showingAllOrIsInDayRange(timestamp, thursdayToSunday)
@@ -471,7 +471,7 @@ const Home = () => {
           grid-auto-rows: minmax(27px, auto);
           margin-bottom: calc(27px / 2);
         }
-        .day-labels {
+        .date-labels {
           min-height: 60px;
         }
       `}</style>
