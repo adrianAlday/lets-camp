@@ -16,7 +16,11 @@ import Head from "next/head";
 
 // if site has no data, fetch it first
 
-// initially suggest some grounds before typing?
+// initially suggest some grounds without typing?
+
+// get ip, geolocate
+
+// preload with query from hardcoded that is closet to geolocation?
 
 const baseDelaySeconds = 3;
 
