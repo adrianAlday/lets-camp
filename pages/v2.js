@@ -4,8 +4,6 @@ import axios from "axios";
 import { daysOfWeek, favoriteCampsites } from "../common/helper";
 import Head from "next/head";
 
-// consistent use of day date timestamp
-
 const baseDelaySeconds = 3;
 
 const sleep = () =>
