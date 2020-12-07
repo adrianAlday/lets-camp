@@ -203,9 +203,9 @@ const Home = () => {
                     const nextCampgroundIdAvailabilityDates = Object.keys(
                       availabilities
                     )
-                      .reduce((accumulator, day) => {
-                        if (!accumulator.includes(day)) {
-                          accumulator.push(day);
+                      .reduce((accumulator, timestamp) => {
+                        if (!accumulator.includes(timestamp)) {
+                          accumulator.push(timestamp);
                         }
 
                         return accumulator;
@@ -389,26 +389,26 @@ const Home = () => {
                       campgroundCampsite.campsite_id
                     ]
                   )
-                    .filter(([day, _status]) =>
-                      showingAllOrIsInDayRange(day, thursdayToSunday)
+                    .filter(([timestamp, _status]) =>
+                      showingAllOrIsInDayRange(timestamp, thursdayToSunday)
                     )
-                    .map(([day, status]) => {
-                      const key = `${campgroundCampsite.campsite_id}-${day}`;
+                    .map(([timestamp, status]) => {
+                      const key = `${campgroundCampsite.campsite_id}-${timestamp}`;
 
                       const style = {
                         gridColumnStart:
                           campgroundCampsiteAvailabilityDates[
                             selectedCampgroundId
                           ]
-                            .filter((day) =>
-                              showingAllOrIsInDayRange(day, thursdayToSunday)
+                            .filter((timestamp) =>
+                              showingAllOrIsInDayRange(timestamp, thursdayToSunday)
                             )
-                            .indexOf(day) + 3,
+                            .indexOf(timestamp) + 3,
                       };
 
-                      const copy = showingAllOrIsInDayRange(day, fridayToSunday)
+                      const copy = showingAllOrIsInDayRange(timestamp, fridayToSunday)
                         ? status === "Available"
-                          ? isInDayRange(day, saturdayToSunday)
+                          ? isInDayRange(timestamp, saturdayToSunday)
                             ? "🟣"
                             : "🔵"
                           : "⚫"
