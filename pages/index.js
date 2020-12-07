@@ -109,7 +109,6 @@ const Home = () => {
             if (results) {
               setCampgroundSearchResults(
                 results
-                  .filter((result) => result?.entity_type === "campground")
                   .sort((a, b) => (a?.name > b?.name ? 1 : -1))
               );
             }
