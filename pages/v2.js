@@ -368,84 +368,94 @@ const Home = () => {
                   )
                 : true
             )
-            .map((campgroundCampsite) => (
-              <React.Fragment key={campgroundCampsite.campsite_id}>
-                <div
-                  style={{
-                    gridColumnStart: 1,
-                  }}
-                >
-                  {favoriteCampsites[selectedCampgroundId]?.includes(
-                    campgroundCampsite.name
-                  )
-                    ? "⭐"
-                    : ""}
-                </div>
-
+            .map((campgroundCampsite) => {
+              const wrapWithLink = (text) => (
                 <a
                   href={`https://www.recreation.gov/camping/campsites/${campgroundCampsite.campsite_id}`}
                   target="_blank"
                 >
+                  {text}
+                </a>
+              );
+
+              return (
+                <React.Fragment key={campgroundCampsite.campsite_id}>
+                  <div
+                    style={{
+                      gridColumnStart: 1,
+                    }}
+                  >
+                    {wrapWithLink(
+                      favoriteCampsites[selectedCampgroundId]?.includes(
+                        campgroundCampsite.name
+                      )
+                        ? "⭐"
+                        : ""
+                    )}
+                  </div>
+
                   <div
                     style={{
                       gridColumnStart: 2,
                     }}
                   >
-                    {campgroundCampsite.name.toLowerCase()}
+                    {wrapWithLink(campgroundCampsite.name.toLowerCase())}
                   </div>
-                </a>
 
-                {campgroundCampsiteAvailabilities?.[selectedCampgroundId]?.[
-                  campgroundCampsite.campsite_id
-                ] &&
-                campgroundCampsiteAvailabilityDates?.[selectedCampgroundId] ? (
-                  Object.entries(
-                    campgroundCampsiteAvailabilities[selectedCampgroundId][
-                      campgroundCampsite.campsite_id
-                    ]
-                  )
-                    .filter(([timestamp, _status]) =>
-                      showingAllOrIsInDayRange(timestamp, thursdayToSunday)
+                  {campgroundCampsiteAvailabilities?.[selectedCampgroundId]?.[
+                    campgroundCampsite.campsite_id
+                  ] &&
+                  campgroundCampsiteAvailabilityDates?.[
+                    selectedCampgroundId
+                  ] ? (
+                    Object.entries(
+                      campgroundCampsiteAvailabilities[selectedCampgroundId][
+                        campgroundCampsite.campsite_id
+                      ]
                     )
-                    .map(([timestamp, status]) => {
-                      const key = `${campgroundCampsite.campsite_id}-${timestamp}`;
-
-                      const style = {
-                        gridColumnStart:
-                          campgroundCampsiteAvailabilityDates[
-                            selectedCampgroundId
-                          ]
-                            .filter((timestamp) =>
-                              showingAllOrIsInDayRange(
-                                timestamp,
-                                thursdayToSunday
-                              )
-                            )
-                            .indexOf(timestamp) + 3,
-                      };
-
-                      const copy = showingAllOrIsInDayRange(
-                        timestamp,
-                        fridayToSunday
+                      .filter(([timestamp, _status]) =>
+                        showingAllOrIsInDayRange(timestamp, thursdayToSunday)
                       )
-                        ? status === "Available"
-                          ? isInDayRange(timestamp, saturdayToSunday)
-                            ? "🟣"
-                            : "🔵"
-                          : "⚫"
-                        : blankSpace();
+                      .map(([timestamp, status]) => {
+                        const key = `${campgroundCampsite.campsite_id}-${timestamp}`;
 
-                      return (
-                        <div key={key} style={style}>
-                          {copy}
-                        </div>
-                      );
-                    })
-                ) : (
-                  <div>loading...</div>
-                )}
-              </React.Fragment>
-            ))}
+                        const style = {
+                          gridColumnStart:
+                            campgroundCampsiteAvailabilityDates[
+                              selectedCampgroundId
+                            ]
+                              .filter((timestamp) =>
+                                showingAllOrIsInDayRange(
+                                  timestamp,
+                                  thursdayToSunday
+                                )
+                              )
+                              .indexOf(timestamp) + 3,
+                        };
+
+                        const copy = showingAllOrIsInDayRange(
+                          timestamp,
+                          fridayToSunday
+                        )
+                          ? status === "Available"
+                            ? isInDayRange(timestamp, saturdayToSunday)
+                              ? "🟣"
+                              : "🔵"
+                            : "⚫"
+                          : blankSpace();
+
+                        return (
+                          <div key={key} style={style}>
+                            {wrapWithLink(copy)}
+                          </div>
+                        );
+                      })
+                  ) : (
+                    <div>{wrapWithLink("loading")}</div>
+                  )}
+                </React.Fragment>
+              );
+            })}
         </div>
       </div>
 
