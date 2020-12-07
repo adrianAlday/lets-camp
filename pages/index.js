@@ -395,7 +395,7 @@ const Home = () => {
         )}
       </div>
 
-      <style jsx global>{`
+      <style jsx>{`
         body {
           font-family: "IBM Plex Sans", serif;
           background-color: #202124;
