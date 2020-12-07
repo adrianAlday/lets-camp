@@ -470,7 +470,7 @@ const Home = () => {
           margin-bottom: calc(27px / 2);
         }
         .date-labels {
-          min-height: 60px;
+          min-height: 90px;
         }
       `}</style>
     </div>
