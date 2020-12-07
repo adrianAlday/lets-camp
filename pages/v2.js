@@ -197,10 +197,10 @@ const Home = () => {
                   });
 
                   setCampgroundCampsiteAvailabilityDates((previousValue) => {
-                    const previousCampgroundIdAvailabilityDays =
+                    const previousCampgroundIdAvailabilityDates =
                       previousValue[campgroundId] || [];
 
-                    const nextCampgroundIdAvailabilityDays = Object.keys(
+                    const nextCampgroundIdAvailabilityDates = Object.keys(
                       availabilities
                     )
                       .reduce((accumulator, day) => {
@@ -209,12 +209,12 @@ const Home = () => {
                         }
 
                         return accumulator;
-                      }, previousCampgroundIdAvailabilityDays)
+                      }, previousCampgroundIdAvailabilityDates)
                       .sort((a, b) => (a > b ? 1 : -1));
 
                     return {
                       ...previousValue,
-                      [campgroundId]: nextCampgroundIdAvailabilityDays,
+                      [campgroundId]: nextCampgroundIdAvailabilityDates,
                     };
                   });
                 }
