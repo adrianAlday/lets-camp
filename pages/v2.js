@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import debounce from "lodash/debounce";
 import axios from "axios";
-import { favoriteCampsites } from "../common/helper";
+import { daysOfWeek, favoriteCampsites } from "../common/helper";
 import Head from "next/head";
 
 const baseDelaySeconds = 3;
@@ -16,6 +16,13 @@ const yearMonthDayFromTimestamp = (timestamp) => [
   timestamp.slice(5, 7),
   timestamp.slice(8, 10),
 ];
+
+const saturdayToSunday = [daysOfWeek.sat, daysOfWeek.sun];
+const fridayToSunday = [daysOfWeek.fri, ...saturdayToSunday];
+const thursdayToSunday = [daysOfWeek.thu, ...fridayToSunday];
+
+const isDay = (timestamp, daysArray) =>
+  daysArray.includes(new Date(timestamp.slice(0, -1)).getDay());
 
 const Home = () => {
   // state
