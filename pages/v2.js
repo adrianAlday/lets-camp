@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import debounce from "lodash/debounce";
 import axios from "axios";
-import { favoriteSites } from "../common/helper";
+import { favoriteCampsites } from "../common/helper";
 import Head from "next/head";
 
 const baseDelaySeconds = 3;
@@ -137,7 +137,7 @@ const Home = () => {
 
         if (selectedCampgroundCampsites) {
           const selectedCampgroundFavoriteSites =
-            favoriteSites[selectedCampgroundId];
+            favoriteCampsites[selectedCampgroundId];
 
           const sortedSelectedCampgroundCampsites = selectedCampgroundFavoriteSites
             ? selectedCampgroundCampsites.sort((a, b) =>

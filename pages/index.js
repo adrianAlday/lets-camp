@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import debounce from "lodash/debounce";
 import axios from "axios";
 import Head from "next/head";
-import { favoriteSites } from "../common/helper";
+import { favoriteCampsites } from "../common/helper";
 
 const baseDelaySeconds = 3;
 
@@ -316,7 +316,7 @@ const Home = () => {
                 {campsites
                   .filter((campsite) =>
                     showOnlyFavoriteCampsites
-                      ? favoriteSites[campsite.parent_asset_id]?.includes(
+                      ? favoriteCampsites[campsite.parent_asset_id]?.includes(
                           campsite.name
                         )
                       : true
@@ -324,7 +324,7 @@ const Home = () => {
                   .map((campsite) => (
                     <div key={campsite.campsite_id} className="campsite">
                       <div>
-                        {favoriteSites[campsite.parent_asset_id]?.includes(
+                        {favoriteCampsites[campsite.parent_asset_id]?.includes(
                           campsite.name
                         )
                           ? "⭐"

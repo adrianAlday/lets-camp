@@ -1,4 +1,4 @@
-export const favoriteSites = {
+export const favoriteCampsites = {
   232507: [
     "104",
     "103",
