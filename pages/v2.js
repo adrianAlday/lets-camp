@@ -449,7 +449,7 @@ const Home = () => {
                         );
                       })
                   ) : (
-                    <div>{wrapWithLink("loading")}</div>
+                    <div>{wrapWithLink("loading...")}</div>
                   )}
                 </React.Fragment>
               );
