@@ -63,6 +63,9 @@ const Home = () => {
 
   const initialShowOnly = false;
 
+  const [showOnlyWeekendDays, setShowOnlyWeekendDays] = useState(
+    initialShowOnly
+  );
   const [showOnlyFavoriteCampsites, setShowOnlyFavoriteCampsites] = useState(
     initialShowOnly
   );
@@ -117,6 +120,7 @@ const Home = () => {
   const handleCampgroundResultClick = (campground) => {
     setCampgroundIdIsSelected(!initialCampgroundIdIsSelected);
     setDisplayedCampgroundSearchQuery(campground.name.toLowerCase());
+    setShowOnlyWeekendDays(initialShowOnly);
     setShowOnlyFavoriteCampsites(initialShowOnly);
 
     const campgroundId = campground.entity_id;
@@ -225,6 +229,9 @@ const Home = () => {
     };
   }, [selectedCampgroundId]);
 
+  const handleShowDaysToggle = () =>
+    setShowOnlyWeekendDays(!showOnlyWeekendDays);
+
   const handleShowCampsitesToggle = () =>
     setShowOnlyFavoriteCampsites(!showOnlyFavoriteCampsites);
 
@@ -264,6 +271,12 @@ const Home = () => {
 
         {campgroundCampsites[selectedCampgroundId] && (
           <React.Fragment>
+            <div className="campground-result" onClick={handleShowDaysToggle}>
+              {showOnlyWeekendDays
+                ? "showing weekend days"
+                : "showing all days"}
+            </div>
+
             {favoriteCampsites[selectedCampgroundId] && (
               <div
                 className="campground-result"
