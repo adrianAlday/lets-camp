@@ -242,6 +242,9 @@ const Home = () => {
   const handleShowCampsitesToggle = () =>
     setShowOnlyFavoriteCampsites(!showOnlyFavoriteCampsites);
 
+  const showingAllOrIsInDayRange = (timestamp, daysArray) =>
+    !showOnlyWeekendDays || isInDayRange(timestamp, daysArray);
+
   const blankSpace = () => <React.Fragment>&nbsp;</React.Fragment>;
 
   return (
@@ -300,46 +303,48 @@ const Home = () => {
         )}
 
         <div className="days-grid day-labels">
-          {campgroundCampsiteAvailabilityDays?.[selectedCampgroundId]?.map(
-            (timestamp, index) => {
+          {campgroundCampsiteAvailabilityDays[selectedCampgroundId]
+            ?.filter((timestamp) =>
+              showingAllOrIsInDayRange(timestamp, thursdayToSunday)
+            )
+            .map((timestamp, index) => {
               const [year, month, day] = yearMonthDayFromTimestamp(timestamp);
 
               const style = {
-                gridColumnStart:
-                  campgroundCampsiteAvailabilityDays[
-                    selectedCampgroundId
-                  ].indexOf(timestamp) + 3,
+                gridColumnStart: index + 3,
               };
 
               return (
                 <div key={timestamp} style={style}>
-                  <div>
-                    {(month === "01" && day === "01") || index === 0 ? (
-                      year
-                    ) : (
-                      <React.Fragment>&nbsp;</React.Fragment>
-                    )}
-                  </div>
+                  {showingAllOrIsInDayRange(timestamp, fridayToSunday) ? (
+                    <React.Fragment>
+                      <div>
+                        {!showOnlyWeekendDays &&
+                        ((month === "01" && day === "01") || index === 0)
+                          ? year
+                          : blankSpace()}
+                      </div>
 
-                  <div>
-                    {day === "01" || index === 0 ? (
-                      month
-                    ) : (
-                      <React.Fragment>&nbsp;</React.Fragment>
-                    )}
-                  </div>
+                      <div>
+                        {showOnlyWeekendDays || day === "01" || index === 0
+                          ? month
+                          : blankSpace()}
+                      </div>
 
-                  <div>{day}</div>
+                      <div>{day}</div>
 
-                  <div>
-                    {isInDayRange(timestamp, saturdayToSunday)
-                      ? "⭐"
-                      : blankSpace()}
-                  </div>
+                      <div>
+                        {isInDayRange(timestamp, saturdayToSunday)
+                          ? "⭐"
+                          : blankSpace()}
+                      </div>
+                    </React.Fragment>
+                  ) : (
+                    blankSpace()
+                  )}
                 </div>
               );
-            }
-          )}
+            })}
         </div>
 
         <div className="days-grid">
@@ -381,27 +386,38 @@ const Home = () => {
                     campgroundCampsiteAvailabilities[selectedCampgroundId][
                       campgroundCampsite.campsite_id
                     ]
-                  ).map((availability) => {
-                    const day = availability[0];
+                  )
+                    .filter(([day, _status]) =>
+                      showingAllOrIsInDayRange(day, thursdayToSunday)
+                    )
+                    .map(([day, status]) => {
+                      const key = `${campgroundCampsite.campsite_id}-${day}`;
 
-                    const style = {
-                      gridColumnStart:
-                        campgroundCampsiteAvailabilityDays[
-                          selectedCampgroundId
-                        ].indexOf(day) + 3,
-                    };
+                      const style = {
+                        gridColumnStart:
+                          campgroundCampsiteAvailabilityDays[
+                            selectedCampgroundId
+                          ]
+                            .filter((day) =>
+                              showingAllOrIsInDayRange(day, thursdayToSunday)
+                            )
+                            .indexOf(day) + 3,
+                      };
 
-                    const copy = availability[1] === "Available" ? "🔵" : "⚫";
+                      const copy = showingAllOrIsInDayRange(day, fridayToSunday)
+                        ? status === "Available"
+                          ? isInDayRange(day, saturdayToSunday)
+                            ? "🟣"
+                            : "🔵"
+                          : "⚫"
+                        : blankSpace();
 
-                    return (
-                      <div
-                        key={`${campgroundCampsite.campsite_id}-${day}`}
-                        style={style}
-                      >
-                        {copy}
-                      </div>
-                    );
-                  })
+                      return (
+                        <div key={key} style={style}>
+                          {copy}
+                        </div>
+                      );
+                    })
                 ) : (
                   <div>loading...</div>
                 )}
