@@ -300,7 +300,7 @@ const Home = () => {
           </React.Fragment>
         )}
 
-        <div className="days-grid date-labels">
+        <div className="date-grid date-labels">
           {campgroundCampsiteAvailabilityDates[selectedCampgroundId]
             ?.filter((timestamp) =>
               showingAllOrIsInDayRange(timestamp, thursdayToSunday)
@@ -349,7 +349,7 @@ const Home = () => {
             })}
         </div>
 
-        <div className="days-grid">
+        <div className="date-grid">
           {campgroundCampsites[selectedCampgroundId]
             ?.filter((campgroundCampsite) =>
               showOnlyFavoriteCampsites
@@ -456,7 +456,7 @@ const Home = () => {
           margin-left: 27px;
           margin-bottom: 27px;
         }
-        .days-grid {
+        .date-grid {
           display: grid;
           grid-template-columns:
             [star] 27px
