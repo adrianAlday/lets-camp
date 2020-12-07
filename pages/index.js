@@ -48,7 +48,11 @@ const Home = () => {
     setRequestedCampgroundSearchQuery,
   ] = useState(initialCampgroundSearchQuery);
 
-  const [campgroundSearchResults, setCampgroundSearchResults] = useState([]);
+  const initialCampgroundSearchResults = [];
+
+  const [campgroundSearchResults, setCampgroundSearchResults] = useState(
+    initialCampgroundSearchResults
+  );
 
   // data
 
@@ -104,13 +108,11 @@ const Home = () => {
             cancelToken,
           })
           .then((response) => {
-            const results = response?.data?.results;
-
-            if (results) {
-              setCampgroundSearchResults(
-                results.sort((a, b) => (a?.name > b?.name ? 1 : -1))
-              );
-            }
+            setCampgroundSearchResults(
+              response?.data?.results?.sort((a, b) =>
+                a?.name > b?.name ? 1 : -1
+              ) || initialCampgroundSearchResults
+            );
           });
       }
     }, 300),
