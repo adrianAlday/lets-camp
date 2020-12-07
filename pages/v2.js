@@ -282,7 +282,7 @@ const Home = () => {
 
         {campgroundCampsites[selectedCampgroundId] && (
           <React.Fragment>
-            <div className="campground-result" onClick={handleShowDaysToggle}>
+            <div className="toggle" onClick={handleShowDaysToggle}>
               {campgroundCampsiteAvailabilityDates[selectedCampgroundId]
                 ? showOnlyWeekendDays
                   ? "showing weekend days"
@@ -292,7 +292,7 @@ const Home = () => {
 
             {favoriteCampsites[selectedCampgroundId] && (
               <div
-                className="campground-result"
+                className="toggle"
                 onClick={handleShowCampsitesToggle}
               >
                 {showOnlyFavoriteCampsites
@@ -454,7 +454,7 @@ const Home = () => {
         input:focus {
           outline: none;
         }
-        .campground-result {
+        .campground-result, .toggle {
           margin-left: 27px;
           margin-bottom: 27px;
         }
