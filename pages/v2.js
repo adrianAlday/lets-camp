@@ -283,9 +283,11 @@ const Home = () => {
         {campgroundCampsites[selectedCampgroundId] && (
           <React.Fragment>
             <div className="campground-result" onClick={handleShowDaysToggle}>
-              {showOnlyWeekendDays
-                ? "showing weekend days"
-                : "showing all days"}
+              {campgroundCampsiteAvailabilityDates[selectedCampgroundId]
+                ? showOnlyWeekendDays
+                  ? "showing weekend days"
+                  : "showing all days"
+                : blankSpace()}
             </div>
 
             {favoriteCampsites[selectedCampgroundId] && (
