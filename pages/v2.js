@@ -291,10 +291,7 @@ const Home = () => {
             </div>
 
             {favoriteCampsites[selectedCampgroundId] && (
-              <div
-                className="toggle"
-                onClick={handleShowCampsitesToggle}
-              >
+              <div className="toggle" onClick={handleShowCampsitesToggle}>
                 {showOnlyFavoriteCampsites
                   ? "showing favorite campsites"
                   : "showing all campsites"}
