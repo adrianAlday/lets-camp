@@ -328,6 +328,8 @@ const Home = () => {
                   </div>
 
                   <div>{day}</div>
+
+                  {isDay(timestamp, saturdayToSunday) && <div>⭐</div>}
                 </div>
               );
             }
