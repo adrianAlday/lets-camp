@@ -13,12 +13,6 @@ const sleep = () =>
     setTimeout(resolve, 1000 * baseDelaySeconds * (1 + Math.random()));
   });
 
-const yearMonthDayFromTimestamp = (timestamp) => [
-  timestamp.slice(0, 4),
-  timestamp.slice(5, 7),
-  timestamp.slice(8, 10),
-];
-
 const saturdayToSunday = [daysOfWeek.sat, daysOfWeek.sun];
 const fridayToSunday = [daysOfWeek.fri, ...saturdayToSunday];
 const thursdayToSunday = [daysOfWeek.thu, ...fridayToSunday];
@@ -310,7 +304,11 @@ const Home = () => {
               showingAllOrIsInDayRange(timestamp, thursdayToSunday)
             )
             .map((timestamp, index) => {
-              const [year, month, day] = yearMonthDayFromTimestamp(timestamp);
+              const [year, month, date] = [
+                timestamp.slice(0, 4),
+                timestamp.slice(5, 7),
+                timestamp.slice(8, 10),
+              ];
 
               const style = {
                 gridColumnStart: index + 3,
@@ -322,18 +320,18 @@ const Home = () => {
                     <React.Fragment>
                       <div>
                         {!showOnlyWeekendDays &&
-                        ((month === "01" && day === "01") || index === 0)
+                        ((month === "01" && date === "01") || index === 0)
                           ? year
                           : blankSpace()}
                       </div>
 
                       <div>
-                        {showOnlyWeekendDays || day === "01" || index === 0
+                        {showOnlyWeekendDays || date === "01" || index === 0
                           ? month
                           : blankSpace()}
                       </div>
 
-                      <div>{day}</div>
+                      <div>{date}</div>
 
                       <div>
                         {isInDayRange(timestamp, saturdayToSunday)
