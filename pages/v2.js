@@ -21,7 +21,7 @@ const saturdayToSunday = [daysOfWeek.sat, daysOfWeek.sun];
 const fridayToSunday = [daysOfWeek.fri, ...saturdayToSunday];
 const thursdayToSunday = [daysOfWeek.thu, ...fridayToSunday];
 
-const isDay = (timestamp, daysArray) =>
+const isInDayRange = (timestamp, daysArray) =>
   daysArray.includes(new Date(timestamp.slice(0, -1)).getDay());
 
 const Home = () => {
@@ -329,7 +329,11 @@ const Home = () => {
 
                   <div>{day}</div>
 
-                  {isDay(timestamp, saturdayToSunday) && <div>⭐</div>}
+                  <div>
+                    {isInDayRange(timestamp, saturdayToSunday)
+                      ? "⭐"
+                      : blankSpace()}
+                  </div>
                 </div>
               );
             }
