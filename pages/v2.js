@@ -380,13 +380,18 @@ const Home = () => {
                     : ""}
                 </div>
 
-                <div
-                  style={{
-                    gridColumnStart: 2,
-                  }}
+                <a
+                  href={`https://www.recreation.gov/camping/campsites/${campgroundCampsite.campsite_id}`}
+                  target="_blank"
                 >
-                  {campgroundCampsite.name.toLowerCase()}
-                </div>
+                  <div
+                    style={{
+                      gridColumnStart: 2,
+                    }}
+                  >
+                    {campgroundCampsite.name.toLowerCase()}
+                  </div>
+                </a>
 
                 {campgroundCampsiteAvailabilities?.[selectedCampgroundId]?.[
                   campgroundCampsite.campsite_id
@@ -485,6 +490,10 @@ const Home = () => {
         }
         .date-labels {
           min-height: 90px;
+        }
+        a {
+          color: #d8dbdd;
+          text-decoration: none;
         }
       `}</style>
     </div>
