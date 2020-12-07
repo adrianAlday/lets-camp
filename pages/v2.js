@@ -297,7 +297,7 @@ const Home = () => {
                 ? showOnlyWeekendDays
                   ? "showing weekend days"
                   : "showing all days"
-                : blankSpace()}
+                : "loading..."}
             </div>
 
             {favoriteCampsites[selectedCampgroundId] && (
