@@ -476,6 +476,7 @@ const Home = () => {
         .toggle {
           margin-left: 27px;
           margin-bottom: 27px;
+          cursor: pointer;
         }
         .date-grid {
           display: grid;
