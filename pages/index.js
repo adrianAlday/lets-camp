@@ -104,12 +104,11 @@ const Home = () => {
             cancelToken,
           })
           .then((response) => {
-            const results = response?.data?.inventory_suggestions;
+            const results = response?.data?.results;
 
             if (results) {
               setCampgroundSearchResults(
-                results
-                  .sort((a, b) => (a?.name > b?.name ? 1 : -1))
+                results.sort((a, b) => (a?.name > b?.name ? 1 : -1))
               );
             }
           });
